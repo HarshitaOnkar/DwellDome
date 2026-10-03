@@ -2362,7 +2362,7 @@
                                     <!-- VIEW -->
 
                                     <a
-                                        href="{{ document.file.url }}"
+                                        href="{% url 'view_document' document.id %}"
                                         target="_blank"
                                         class="document-action-link"
                                     >

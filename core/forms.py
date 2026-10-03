@@ -366,6 +366,33 @@ class DocumentForm(forms.ModelForm):
                     f"{asset.room.name} — {asset.name}"
             )
 
+    def clean_file(self):
+        uploaded_file = self.cleaned_data.get('file')
+        
+        if not uploaded_file:
+            return uploaded_file
+
+        # Limit uploads to 10 MB.
+        if uploaded_file.size > 10 * 1024 * 1024:
+            raise forms.ValidationError(
+                "File size must not exceed 10 MB."
+            )
+
+        # Allow only common document formats.
+        allowed_extensions = {
+            '.pdf', '.jpg', '.jpeg', '.png',
+            '.doc', '.docx', '.xls', '.xlsx'
+        }
+
+        import os
+        extension = os.path.splitext(uploaded_file.name)[1].lower()
+
+        if extension not in allowed_extensions:
+            raise forms.ValidationError(
+                "Upload a PDF, image, Word document, or Excel file."
+            )
+
+        return uploaded_file
 
 class ExpenseForm(forms.ModelForm):
 

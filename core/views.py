@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from django.contrib.auth.decorators import login_required
+from django.http import FileResponse, Http404
+import mimetypes
 
 from django.db.models import Q, Count, Sum
 
@@ -1424,6 +1426,39 @@ def delete_document(request, document_id):
     )
 
     return redirect('documents')
+
+
+@login_required
+def view_document(request, document_id):
+    home = get_object_or_404(Home, owner=request.user)
+
+    document = get_object_or_404(
+        Document,
+        id=document_id,
+        home=home
+    )
+
+    if not document.file:
+        messages.error(request, "Document file not found.")
+        return redirect('documents')
+
+    content_type, _ = mimetypes.guess_type(document.file.name)
+
+    # Only PDFs are displayed inline.
+    is_pdf = content_type == 'application/pdf'
+
+    response = FileResponse(
+        document.file.open('rb'),
+        content_type=content_type or 'application/octet-stream',
+        as_attachment=not is_pdf,
+        filename=document.file.name.split('/')[-1]
+    )
+
+    if is_pdf:
+        response['X-Content-Type-Options'] = 'nosniff'
+        response['Content-Security-Policy'] = "default-src 'none'; object-src 'none'; sandbox"
+
+    return response
 
 
 # ============================================================

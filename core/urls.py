@@ -50,10 +50,12 @@ urlpatterns = [
         views.add_maintenance,
         name='add_maintenance'
     ),
-    path('maintenance/add/', views.add_maintenance_select, name='add_maintenance_select'),
-    
-    path('my-home/maintenance/<int:maintenance_id>/', views.maintenance_detail, name='maintenance_detail'),
-    
+    path('maintenance/add/', views.add_maintenance_select,
+         name='add_maintenance_select'),
+
+    path('my-home/maintenance/<int:maintenance_id>/',
+         views.maintenance_detail, name='maintenance_detail'),
+
     path(
         'my-home/maintenance/<int:maintenance_id>/edit/',
         views.edit_maintenance,
@@ -78,7 +80,9 @@ urlpatterns = [
         views.delete_document,
         name='delete_document'
     ),
-
+    path('documents/<int:document_id>/view/',
+         views.view_document, name='view_document'),
+    
     # Expenses
     path('expenses/', views.expenses, name='expenses'),
     path('expenses/add/', views.add_expense, name='add_expense'),
