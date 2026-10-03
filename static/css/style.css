@@ -1,0 +1,1762 @@
+/* =========================================================
+   DWELLDOME
+   PUBLIC LANDING PAGE
+
+   DESIGN SYSTEM:
+   Dashboard master palette + typography
+
+   RESPONSIVE:
+   DESKTOP
+   LAPTOP
+   TABLET
+   MOBILE
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --cream: #f4ead8;
+    --cream-light: #f8f0e3;
+
+    --burgundy: #672731;
+    --burgundy-dark: #4d1b24;
+
+    --rose: #c98f82;
+    --rose-light: #e5c8bd;
+
+    --brown: #5b4942;
+    --dark: #281e1d;
+
+    --muted: #766763;
+
+    --border: rgba(74, 48, 43, 0.18);
+    --soft-border: rgba(74, 48, 43, 0.11);
+
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--cream);
+    color: var(--dark);
+
+    font-family: var(--sans);
+
+    overflow-x: hidden;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    width: 100%;
+    height: 66px;
+
+    padding: 0 4.8vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 50;
+
+    background: var(--cream);
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+}
+
+
+.brand-icon {
+
+    width: 22px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--burgundy);
+}
+
+
+.brand-icon svg {
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.brand-name {
+
+    font-family: var(--serif);
+
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: -0.4px;
+
+    color: var(--burgundy);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav-links {
+
+    display: flex;
+    align-items: center;
+
+    gap: 34px;
+
+    margin-left: 80px;
+}
+
+
+.nav-links a {
+
+    font-size: 11px;
+
+    color: var(--brown);
+
+    transition: color .25s ease;
+}
+
+
+.nav-links a:hover {
+
+    color: var(--burgundy);
+}
+
+
+/* =========================================================
+   NAV ACTIONS
+========================================================= */
+
+.nav-actions {
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+/* =========================================================
+   SIGN UP BUTTON
+========================================================= */
+
+.signup {
+
+    padding: 10px 19px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--burgundy);
+
+    color: #fff8ef;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+
+.signup:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--burgundy-dark);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.nav-button {
+
+    padding: 10px 21px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--burgundy);
+
+    color: #fff8ef;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+
+.nav-button:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--burgundy-dark);
+}
+
+
+.signup,
+.nav-button {
+
+    position: relative;
+    z-index: 101;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    width: 100%;
+
+    height: calc(100vh - 66px);
+
+    min-height: 520px;
+
+    display: grid;
+
+    grid-template-columns: 46% 54%;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.hero-content {
+
+    height: 100%;
+
+    padding:
+        clamp(28px, 4.8vh, 60px)
+        4vw
+        28px
+        4.8vw;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.eyebrow {
+
+    margin-bottom: 16px;
+
+    color: var(--rose);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 2.4px;
+}
+
+
+/* =========================================================
+   HERO HEADING
+========================================================= */
+
+.hero h1 {
+
+    max-width: 490px;
+
+    color: var(--dark);
+
+    font-family: var(--serif);
+
+    font-size: clamp(38px, 3.4vw, 58px);
+
+    font-weight: 500;
+
+    line-height: .99;
+
+    letter-spacing: -2.4px;
+}
+
+
+.hero h1 em {
+
+    color: var(--burgundy);
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero-description {
+
+    max-width: 408px;
+
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-button {
+
+    width: 237px;
+    height: 46px;
+
+    margin-top: 22px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--burgundy);
+
+    color: #fff7ee;
+
+    border-radius: 4px;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+
+.primary-button:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--burgundy-dark);
+}
+
+
+.arrow {
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   HERO NOTE
+========================================================= */
+
+.hero-note {
+
+    margin-top: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+.note-dot {
+
+    width: 10px;
+    height: 10px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--rose);
+}
+
+
+/* =========================================================
+   MINI FEATURES
+========================================================= */
+
+.mini-features {
+
+    width: 100%;
+    max-width: 490px;
+
+    margin-top: 24px;
+
+    padding-top: 14px;
+
+    display: flex;
+    align-items: center;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.mini-feature {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    min-width: 108px;
+}
+
+
+.mini-icon {
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ead9c7;
+
+    color: var(--burgundy);
+
+    font-size: 14px;
+}
+
+
+.mini-feature div {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1px;
+
+    color: var(--brown);
+
+    font-size: 9px;
+
+    line-height: 1.15;
+}
+
+
+.mini-feature strong {
+
+    font-weight: 600;
+}
+
+
+.feature-divider {
+
+    width: 1px;
+    height: 27px;
+
+    margin: 0 14px;
+
+    background: var(--border);
+}
+
+
+/* =========================================================
+   RIGHT VISUAL
+========================================================= */
+
+.hero-visual {
+
+    height: 100%;
+
+    min-width: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            #d9c0a6 0%,
+            #b99b7d 48%,
+            #8e6b54 100%
+        );
+}
+
+
+/* =========================================================
+   INTERIOR BACKGROUND
+========================================================= */
+
+.interior {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+}
+
+
+.arch {
+
+    position: absolute;
+
+    width: 376px;
+    height: 504px;
+
+    right: 8%;
+    top: -80px;
+
+    border-radius: 192px 192px 0 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #efe1cf,
+            #c6aa8d
+        );
+}
+
+
+.wood-wall {
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 19%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #8a6249 0px,
+            #8a6249 7px,
+            #704c3a 8px,
+            #704c3a 10px
+        );
+}
+
+
+/* =========================================================
+   PLANT
+========================================================= */
+
+.plant-one {
+
+    position: absolute;
+
+    right: 2%;
+    bottom: -8px;
+
+    width: 136px;
+    height: 208px;
+}
+
+
+.plant-one::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 16px;
+    bottom: 0;
+
+    width: 60px;
+    height: 52px;
+
+    border-radius:
+        12px
+        12px
+        24px
+        24px;
+
+    background: #d9c5aa;
+}
+
+
+.plant-one span {
+
+    position: absolute;
+
+    width: 56px;
+    height: 26px;
+
+    border-radius:
+        100%
+        0
+        100%
+        0;
+
+    background: #6b5948;
+}
+
+
+.plant-one span:nth-child(1) {
+
+    right: 56px;
+    top: 40px;
+
+    transform: rotate(-55deg);
+}
+
+
+.plant-one span:nth-child(2) {
+
+    right: 8px;
+    top: 64px;
+
+    transform: rotate(20deg);
+}
+
+
+.plant-one span:nth-child(3) {
+
+    right: 72px;
+    top: 88px;
+
+    transform: rotate(-70deg);
+}
+
+
+.plant-one span:nth-child(4) {
+
+    right: 24px;
+    top: 112px;
+
+    transform: rotate(30deg);
+}
+
+
+.plant-one span:nth-child(5) {
+
+    right: 84px;
+    top: 136px;
+
+    transform: rotate(-60deg);
+}
+
+
+/* =========================================================
+   HOME CARD
+========================================================= */
+
+.home-card {
+
+    position: absolute;
+
+    z-index: 10;
+
+    width: min(488px, 80%);
+
+    left: 7%;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    padding: 23px;
+
+    background: rgba(249, 240, 228, .98);
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 24px 64px rgba(57, 32, 24, .22),
+        0 6px 16px rgba(57, 32, 24, .08);
+}
+
+
+/* =========================================================
+   HOME CARD HEADER
+========================================================= */
+
+.home-card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 14px;
+}
+
+
+.home-card-header p {
+
+    margin-bottom: 5px;
+
+    color: var(--rose);
+
+    font-size: 6px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.6px;
+}
+
+
+.home-card-header h2 {
+
+    color: var(--brown);
+
+    font-family: var(--serif);
+
+    font-size: 21px;
+
+    font-weight: 500;
+}
+
+
+.dots {
+
+    color: var(--brown);
+
+    font-size: 14px;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* =========================================================
+   ROOMS
+========================================================= */
+
+.rooms-grid {
+
+    height: 224px;
+
+    display: grid;
+
+    grid-template-columns: 1.15fr .85fr;
+
+    grid-template-rows: 1fr 1fr;
+
+    gap: 6px;
+}
+
+
+.room {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    color: white;
+
+    background-size: cover;
+
+    background-position: center;
+
+    box-shadow:
+        inset 0 -64px 80px rgba(40, 20, 15, .3);
+}
+
+
+/* =========================================================
+   01 — DINING AREA
+========================================================= */
+
+.dining-area {
+
+    grid-row: 1 / 3;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(105, 76, 60, .2),
+            rgba(60, 38, 29, .65)
+        ),
+        url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+/* =========================================================
+   02 — LOUNGE
+========================================================= */
+
+.lounge {
+
+    background:
+        linear-gradient(
+            rgba(75, 50, 37, .2),
+            rgba(50, 30, 20, .55)
+        ),
+        url("https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=85");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+/* =========================================================
+   03 — LIVING ROOM
+========================================================= */
+
+.living-room {
+
+    background:
+        linear-gradient(
+            rgba(85, 60, 58, .15),
+            rgba(45, 27, 25, .6)
+        ),
+        url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=700&q=85");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+/* =========================================================
+   ROOM LABELS
+========================================================= */
+
+.room-number {
+
+    position: absolute;
+
+    top: 10px;
+    left: 11px;
+
+    font-size: 7px;
+
+    opacity: .8;
+}
+
+
+.room-label {
+
+    position: absolute;
+
+    bottom: 11px;
+    left: 12px;
+
+    font-family: var(--serif);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   HOME STATS
+========================================================= */
+
+.home-stats {
+
+    margin-top: 14px;
+
+    padding-top: 13px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    border-top: 1px solid var(--border);
+}
+
+
+.home-stats div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding-left: 14px;
+
+    border-left: 1px solid var(--border);
+}
+
+
+.home-stats div:first-child {
+
+    padding-left: 0;
+
+    border-left: none;
+}
+
+
+.home-stats span {
+
+    color: var(--rose);
+
+    font-size: 6px;
+
+    letter-spacing: 1.1px;
+
+    font-weight: 600;
+}
+
+
+.home-stats strong {
+
+    color: var(--brown);
+
+    font-family: var(--serif);
+
+    font-size: 19px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   LARGE LAPTOP
+   1200px AND BELOW
+========================================================= */
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+
+    .navbar {
+
+        padding: 0 4vw;
+    }
+
+
+    .nav-links {
+
+        margin-left: 30px;
+
+        gap: 28px;
+    }
+
+
+    .hero {
+
+        grid-template-columns: 47% 53%;
+    }
+
+
+    .hero-content {
+
+        padding-left: 4vw;
+        padding-right: 3vw;
+    }
+
+
+    .hero h1 {
+
+        font-size: 45px;
+    }
+
+
+    .hero-description {
+
+        max-width: 350px;
+    }
+
+
+    .home-card {
+
+        width: 84%;
+
+        left: 6%;
+
+        padding: 19px;
+    }
+
+
+    .rooms-grid {
+
+        height: 204px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   901px — 1024px
+========================================================= */
+
+@media (max-width: 1024px) and (min-width: 901px) {
+
+    .navbar {
+
+        height: 76px;
+
+        padding: 0 30px;
+    }
+
+
+    .brand-name {
+
+        font-size: 20px;
+    }
+
+
+    .nav-links {
+
+        gap: 20px;
+
+        margin-left: 20px;
+    }
+
+
+    .nav-links a {
+
+        font-size: 12px;
+    }
+
+
+    .nav-actions {
+
+        gap: 8px;
+    }
+
+
+    .signup {
+
+        padding: 11px 16px;
+
+        font-size: 12px;
+    }
+
+
+    .nav-button {
+
+        padding: 11px 19px;
+
+        font-size: 12px;
+    }
+
+
+    .hero {
+
+        height: calc(100vh - 76px);
+
+        min-height: 600px;
+
+        grid-template-columns: 48% 52%;
+    }
+
+
+    .hero-content {
+
+        padding:
+            35px
+            25px
+            25px
+            35px;
+    }
+
+
+    .eyebrow {
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(40px, 5vw, 50px);
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-description {
+
+        margin-top: 18px;
+
+        font-size: 12px;
+
+        line-height: 1.55;
+    }
+
+
+    .primary-button {
+
+        width: 245px;
+
+        height: 50px;
+
+        margin-top: 20px;
+
+        font-size: 12px;
+    }
+
+
+    .hero-note {
+
+        margin-top: 15px;
+
+        font-size: 10px;
+    }
+
+
+    .mini-features {
+
+        margin-top: 22px;
+
+        padding-top: 14px;
+    }
+
+
+    .mini-feature {
+
+        min-width: 105px;
+    }
+
+
+    .mini-icon {
+
+        width: 28px;
+        height: 28px;
+
+        font-size: 14px;
+    }
+
+
+    .mini-feature div {
+
+        font-size: 9px;
+    }
+
+
+    .feature-divider {
+
+        height: 28px;
+
+        margin: 0 10px;
+    }
+
+
+    .home-card {
+
+        width: 87%;
+
+        left: 5%;
+
+        padding: 19px;
+    }
+
+
+    .home-card-header h2 {
+
+        font-size: 21px;
+    }
+
+
+    .rooms-grid {
+
+        height: 230px;
+    }
+
+
+    .room-label {
+
+        font-size: 14px;
+    }
+
+
+    .home-stats {
+
+        margin-top: 14px;
+
+        padding-top: 13px;
+    }
+
+
+    .home-stats strong {
+
+        font-size: 20px;
+    }
+
+
+    .home-stats span {
+
+        font-size: 6px;
+    }
+
+
+    .arch {
+
+        right: -10%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   768px — 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+    body {
+
+        overflow-y: auto;
+    }
+
+
+    .navbar {
+
+        height: 72px;
+
+        padding: 0 25px;
+    }
+
+
+    .nav-links {
+
+        display: none;
+    }
+
+
+    .nav-actions {
+
+        margin-left: auto;
+
+        gap: 8px;
+    }
+
+
+    .hero {
+
+        height: auto;
+
+        min-height: auto;
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        overflow: visible;
+    }
+
+
+    .hero-content {
+
+        min-height: 590px;
+
+        padding: 65px 35px;
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(45px, 8vw, 62px);
+    }
+
+
+    .hero-description {
+
+        max-width: 520px;
+
+        font-size: 14px;
+    }
+
+
+    .primary-button {
+
+        width: 290px;
+    }
+
+
+    .mini-features {
+
+        max-width: 550px;
+    }
+
+
+    .hero-visual {
+
+        height: 650px;
+
+        min-height: 650px;
+    }
+
+
+    .home-card {
+
+        width: 72%;
+
+        left: 14%;
+    }
+
+}
+
+
+/* =========================================================
+   PHONE
+   600px AND BELOW
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+
+        height: 68px;
+
+        padding: 0 20px;
+    }
+
+
+    .brand {
+
+        gap: 8px;
+    }
+
+
+    .brand-icon {
+
+        width: 23px;
+
+        height: 27px;
+    }
+
+
+    .brand-name {
+
+        font-size: 18px;
+    }
+
+
+    .nav-actions {
+
+        gap: 6px;
+    }
+
+
+    .signup {
+
+        padding: 10px 13px;
+
+        font-size: 10px;
+    }
+
+
+    .nav-button {
+
+        padding: 10px 15px;
+
+        font-size: 10px;
+    }
+
+
+    .hero-content {
+
+        min-height: 600px;
+
+        padding: 48px 24px;
+    }
+
+
+    .eyebrow {
+
+        font-size: 8px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 42px;
+
+        letter-spacing: -2px;
+
+        line-height: 1;
+    }
+
+
+    .hero-description {
+
+        margin-top: 20px;
+
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+
+    .primary-button {
+
+        width: 100%;
+
+        max-width: 310px;
+
+        height: 54px;
+    }
+
+
+    .hero-note {
+
+        font-size: 11px;
+    }
+
+
+    .mini-features {
+
+        width: 100%;
+
+        gap: 5px;
+    }
+
+
+    .mini-feature {
+
+        min-width: 0;
+
+        flex: 1;
+
+        gap: 6px;
+    }
+
+
+    .mini-icon {
+
+        width: 27px;
+
+        height: 27px;
+    }
+
+
+    .mini-feature div {
+
+        font-size: 8px;
+    }
+
+
+    .feature-divider {
+
+        margin: 0 5px;
+    }
+
+
+    .hero-visual {
+
+        height: 570px;
+
+        min-height: 570px;
+    }
+
+
+    .home-card {
+
+        width: 88%;
+
+        left: 6%;
+
+        padding: 16px;
+    }
+
+
+    .home-card-header {
+
+        margin-bottom: 13px;
+    }
+
+
+    .home-card-header h2 {
+
+        font-size: 19px;
+    }
+
+
+    .home-card-header p {
+
+        font-size: 7px;
+    }
+
+
+    .rooms-grid {
+
+        height: 205px;
+
+        gap: 5px;
+    }
+
+
+    .room-label {
+
+        font-size: 13px;
+    }
+
+
+    .room-number {
+
+        font-size: 7px;
+    }
+
+
+    .home-stats {
+
+        margin-top: 12px;
+
+        padding-top: 11px;
+    }
+
+
+    .home-stats div {
+
+        padding-left: 9px;
+    }
+
+
+    .home-stats span {
+
+        font-size: 5px;
+
+        letter-spacing: .8px;
+    }
+
+
+    .home-stats strong {
+
+        font-size: 17px;
+    }
+
+
+    .arch {
+
+        width: 360px;
+
+        height: 520px;
+
+        right: -20%;
+    }
+
+
+    .wood-wall {
+
+        width: 13%;
+    }
+
+
+    .plant-one {
+
+        transform: scale(.75);
+
+        transform-origin: bottom right;
+
+        right: -3%;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   400px AND BELOW
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .navbar {
+
+        padding: 0 15px;
+    }
+
+
+    .brand-name {
+
+        font-size: 17px;
+    }
+
+
+    .nav-actions {
+
+        gap: 4px;
+    }
+
+
+    .signup {
+
+        padding: 9px 10px;
+
+        font-size: 9px;
+    }
+
+
+    .nav-button {
+
+        padding: 9px 11px;
+
+        font-size: 9px;
+    }
+
+
+    .hero-content {
+
+        min-height: 570px;
+
+        padding: 42px 20px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+    }
+
+
+    .hero-description {
+
+        font-size: 12px;
+    }
+
+
+    .mini-feature div {
+
+        font-size: 7px;
+    }
+
+
+    .hero-visual {
+
+        height: 510px;
+
+        min-height: 510px;
+    }
+
+
+    .home-card {
+
+        width: 92%;
+
+        left: 4%;
+
+        padding: 13px;
+    }
+
+
+    .home-card-header h2 {
+
+        font-size: 17px;
+    }
+
+
+    .rooms-grid {
+
+        height: 180px;
+    }
+
+
+    .room-label {
+
+        font-size: 11px;
+    }
+
+
+    .home-stats strong {
+
+        font-size: 15px;
+    }
+
+}

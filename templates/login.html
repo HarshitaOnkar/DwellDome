@@ -1,0 +1,1589 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login — DwellDome</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================
+           DWELLDOME LOGIN
+           ========================================= */
+
+        :root {
+            --cream: #f4ead8;
+            --cream-light: #f8f0e3;
+
+            --burgundy: #672731;
+            --burgundy-dark: #4d1b24;
+
+            --rose: #c98f82;
+            --rose-light: #e5c8bd;
+
+            --brown: #5b4942;
+            --dark: #281e1d;
+
+            --muted: #766763;
+
+            --border: rgba(74, 48, 43, 0.18);
+
+            --serif: "Playfair Display", Georgia, serif;
+            --sans: "DM Sans", Arial, sans-serif;
+        }
+
+
+        /* =========================================
+           RESET
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+            font-family: var(--sans);
+            background: var(--cream);
+            color: var(--dark);
+        }
+
+
+        /* =========================================
+           MAIN PAGE
+           ========================================= */
+
+        .login-page {
+            min-height: 100vh;
+
+            padding: 19px 30px;
+
+            display: grid;
+            grid-template-columns: 1.02fr 1fr;
+        }
+
+
+        /* =========================================
+           LEFT VISUAL PANEL
+           ========================================= */
+
+        .login-visual {
+            position: relative;
+
+            min-height: calc(100vh - 38px);
+
+            overflow: hidden;
+
+            border-radius: 18px 0 0 18px;
+
+            isolation: isolate;
+
+            color: #ffffff;
+        }
+
+
+        .visual-image {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1500&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            z-index: -3;
+
+            transform: scale(1.01);
+        }
+
+
+        .visual-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(48, 31, 26, 0.60) 0%,
+                    rgba(48, 31, 26, 0.30) 48%,
+                    rgba(48, 31, 26, 0.12) 100%
+                );
+
+            z-index: -2;
+        }
+
+
+        /* =========================================
+           BRAND
+           ========================================= */
+
+        .visual-brand {
+            position: absolute;
+
+            top: 42px;
+            left: 46px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 600;
+
+            z-index: 2;
+        }
+
+
+        .brand-icon {
+            width: 29px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .brand-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =========================================
+           VISUAL CONTENT
+           ========================================= */
+
+        .visual-content {
+            position: absolute;
+
+            left: 46px;
+            bottom: 108px;
+
+            max-width: 410px;
+        }
+
+
+        .visual-eyebrow {
+            margin-bottom: 18px;
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 2.4px;
+
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+
+        .visual-content h1 {
+            font-family: var(--serif);
+
+            font-size: clamp(32px, 3.2vw, 51px);
+
+            line-height: 1.08;
+
+            font-weight: 500;
+
+            letter-spacing: -1.2px;
+
+            color: #ffffff;
+        }
+
+
+        .visual-line {
+            width: 43px;
+            height: 1px;
+
+            margin: 24px 0 18px;
+
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+
+        .visual-caption {
+            font-size: 10px;
+            line-height: 1.7;
+
+            letter-spacing: 1.6px;
+
+            text-transform: uppercase;
+
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+
+        /* =========================================
+           VISUAL FOOTER
+           ========================================= */
+
+        .visual-footer {
+            position: absolute;
+
+            left: 46px;
+            right: 46px;
+            bottom: 28px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 7px;
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+
+        .visual-footer i {
+            width: 19px;
+            height: 1px;
+
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* =========================================
+           RIGHT LOGIN PANEL
+           ========================================= */
+
+        .login-panel {
+            min-height: calc(100vh - 38px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 48px 56px;
+
+            background: var(--cream-light);
+
+            border-radius: 0 18px 18px 0;
+        }
+
+
+        .login-container {
+            width: min(100%, 408px);
+        }
+
+
+        /* =========================================
+           LOGIN HEADING
+           ========================================= */
+
+        .login-heading {
+            margin-bottom: 30px;
+        }
+
+
+        .login-eyebrow {
+            margin-bottom: 14px;
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 3.2px;
+
+            color: #ae765f;
+        }
+
+
+        .login-heading h2 {
+            font-family: var(--serif);
+
+            font-size: clamp(32px, 3.2vw, 44px);
+
+            line-height: 1.08;
+
+            font-weight: 500;
+
+            letter-spacing: -1.2px;
+
+            color: var(--dark);
+        }
+
+
+        .login-heading h2 em {
+            font-style: normal;
+
+            color: var(--burgundy);
+        }
+
+
+        .login-description {
+            max-width: 344px;
+
+            margin-top: 16px;
+
+            font-size: 11px;
+            line-height: 1.7;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .login-form {
+            width: 100%;
+        }
+
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 10px;
+            font-weight: 600;
+
+            color: var(--brown);
+        }
+
+
+        /* =========================================
+           INPUT
+           ========================================= */
+
+        .input-wrapper {
+            position: relative;
+
+            width: 100%;
+        }
+
+
+        .input-wrapper input {
+            width: 100%;
+            height: 46px;
+
+            padding: 0 42px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            outline: none;
+
+            background: rgba(255, 255, 255, 0.35);
+
+            font-family: var(--sans);
+            font-size: 11px;
+
+            color: var(--dark);
+
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .input-wrapper input::placeholder {
+            color: #938681;
+        }
+
+
+        .input-wrapper input:focus {
+            border-color: rgba(103, 39, 49, 0.55);
+
+            background: rgba(255, 255, 255, 0.65);
+
+            box-shadow:
+                0 0 0 3px rgba(103, 39, 49, 0.07);
+        }
+
+
+        /* =========================================
+           INPUT ICON
+           ========================================= */
+
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            width: 17px;
+            height: 17px;
+
+            transform: translateY(-50%);
+
+            color: #75645e;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        .input-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =========================================
+           PASSWORD TOGGLE
+           ========================================= */
+
+        .password-toggle {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            width: 18px;
+            height: 18px;
+
+            transform: translateY(-50%);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #6d5d58;
+
+            cursor: pointer;
+
+            padding: 0;
+
+            z-index: 2;
+        }
+
+
+        .password-toggle svg {
+            width: 17px;
+            height: 17px;
+        }
+
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================================
+           FIELD ERRORS
+           ========================================= */
+
+        .field-error {
+            margin-top: 6px;
+
+            font-size: 9px;
+            line-height: 1.5;
+
+            color: #913838;
+        }
+
+
+        .form-errors {
+            margin-bottom: 14px;
+
+            padding: 10px 11px;
+
+            border-radius: 7px;
+
+            background: rgba(145, 52, 52, 0.08);
+
+            color: #8c3636;
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           FORM OPTIONS
+           ========================================= */
+
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 3px;
+            margin-bottom: 22px;
+        }
+
+
+        .remember {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            color: var(--brown);
+        }
+
+
+        .remember input {
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+
+        .custom-checkbox {
+            width: 17px;
+            height: 17px;
+
+            flex-shrink: 0;
+
+            border: 1px solid rgba(91, 73, 66, 0.4);
+
+            border-radius: 4px;
+
+            background: transparent;
+
+            position: relative;
+
+            transition: 0.2s ease;
+        }
+
+
+        .remember input:focus-visible + .custom-checkbox {
+            outline: 2px solid rgba(103, 39, 49, 0.25);
+
+            outline-offset: 2px;
+        }
+
+
+        .remember input:checked + .custom-checkbox {
+            background: var(--burgundy);
+
+            border-color: var(--burgundy);
+        }
+
+
+        .remember input:checked + .custom-checkbox::after {
+            content: "";
+
+            position: absolute;
+
+            left: 5px;
+            top: 2px;
+
+            width: 5px;
+            height: 8px;
+
+            border-right: 1.5px solid #ffffff;
+            border-bottom: 1.5px solid #ffffff;
+
+            transform: rotate(45deg);
+        }
+
+
+        /* =========================================
+           FORGOT PASSWORD
+           ========================================= */
+
+        .forgot-password {
+            border: 0;
+
+            padding: 0;
+
+            background: transparent;
+
+            font-family: var(--sans);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            color: var(--burgundy);
+
+            cursor: pointer;
+
+            transition: color 0.2s ease;
+        }
+
+
+        .forgot-password:hover {
+            color: var(--burgundy-dark);
+        }
+
+
+        .forgot-password:focus-visible {
+            outline: 2px solid rgba(103, 39, 49, 0.25);
+
+            outline-offset: 3px;
+
+            border-radius: 3px;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+           ========================================= */
+
+        .login-button {
+            width: 100%;
+            height: 49px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: var(--burgundy);
+
+            color: #ffffff;
+
+            font-family: var(--sans);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .login-button:hover {
+            background: var(--burgundy-dark);
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(103, 39, 49, 0.18);
+        }
+
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+
+        .login-button:focus-visible {
+            outline: 2px solid rgba(103, 39, 49, 0.35);
+
+            outline-offset: 3px;
+        }
+
+
+        .button-arrow {
+            position: absolute;
+
+            right: 17px;
+
+            font-size: 18px;
+            font-weight: 400;
+
+            transition: transform 0.25s ease;
+        }
+
+
+        .login-button:hover .button-arrow {
+            transform: translateX(4px);
+        }
+
+
+        /* =========================================
+           DJANGO MESSAGES
+           ========================================= */
+
+        .messages {
+            margin-top: 14px;
+        }
+
+
+        .message {
+            padding: 9px 11px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+
+        .message.error {
+            background: rgba(145, 52, 52, 0.08);
+
+            color: #8c3636;
+        }
+
+
+        .message.success {
+            background: rgba(76, 112, 74, 0.09);
+
+            color: #496b47;
+        }
+
+
+        /* =========================================
+           SIGN UP
+           ========================================= */
+
+        .signup-text {
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 10px;
+
+            color: var(--muted);
+        }
+
+
+        .signup-text a {
+            color: var(--burgundy);
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           LARGE LAPTOP
+           ========================================= */
+
+        @media (max-width: 1200px) and (min-width: 901px) {
+
+            .login-page {
+                padding: 18px 25px;
+            }
+
+
+            .login-visual {
+                min-height: calc(100vh - 36px);
+            }
+
+
+            .login-panel {
+                min-height: calc(100vh - 36px);
+
+                padding: 42px 45px;
+            }
+
+
+            .visual-brand,
+            .visual-content {
+                left: 38px;
+            }
+
+
+            .visual-footer {
+                left: 38px;
+                right: 38px;
+            }
+
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 900px) {
+
+            .login-page {
+                min-height: 100vh;
+
+                padding: 18px;
+
+                display: block;
+            }
+
+
+            .login-visual {
+                min-height: 390px;
+
+                border-radius: 20px 20px 0 0;
+            }
+
+
+            .login-panel {
+                min-height: auto;
+
+                padding: 55px 45px;
+
+                border-radius: 0 0 20px 20px;
+            }
+
+
+            .visual-content {
+                bottom: 70px;
+            }
+
+
+            .visual-content h1 {
+                font-size: 45px;
+            }
+
+
+            .visual-footer {
+                display: none;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .login-page {
+                padding: 0;
+            }
+
+
+            .login-visual {
+                min-height: 340px;
+
+                border-radius: 0;
+            }
+
+
+            .visual-brand {
+                top: 30px;
+                left: 28px;
+
+                font-size: 23px;
+            }
+
+
+            .brand-icon {
+                width: 31px;
+                height: 35px;
+            }
+
+
+            .visual-content {
+                left: 28px;
+                right: 28px;
+
+                bottom: 42px;
+            }
+
+
+            .visual-eyebrow {
+                margin-bottom: 14px;
+
+                font-size: 9px;
+
+                letter-spacing: 2.5px;
+            }
+
+
+            .visual-content h1 {
+                font-size: 35px;
+
+                letter-spacing: -0.8px;
+            }
+
+
+            .visual-line {
+                margin: 19px 0 14px;
+            }
+
+
+            .visual-caption {
+                font-size: 9px;
+
+                letter-spacing: 1.7px;
+            }
+
+
+            .login-panel {
+                padding: 45px 25px 50px;
+
+                border-radius: 0;
+            }
+
+
+            .login-heading {
+                margin-bottom: 30px;
+            }
+
+
+            .login-eyebrow {
+                font-size: 9px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .login-heading h2 {
+                font-size: 39px;
+
+                letter-spacing: -1px;
+            }
+
+
+            .login-description {
+                margin-top: 16px;
+
+                font-size: 13px;
+            }
+
+
+            .input-wrapper input {
+                height: 55px;
+            }
+
+
+            .login-button {
+                height: 58px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 400px) {
+
+            .login-visual {
+                min-height: 315px;
+            }
+
+
+            .visual-content h1 {
+                font-size: 31px;
+            }
+
+
+            .login-panel {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+
+            .login-heading h2 {
+                font-size: 34px;
+            }
+
+
+            .form-options {
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+
+            .forgot-password {
+                white-space: nowrap;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="login-page">
+
+
+    <!-- =========================================
+         LEFT VISUAL
+         ========================================= -->
+
+    <section class="login-visual">
+
+        <div class="visual-image"></div>
+
+        <div class="visual-overlay"></div>
+
+
+        <!-- Brand -->
+
+        <a
+            href="{% url 'home' %}"
+            class="visual-brand"
+            aria-label="DwellDome home"
+        >
+
+            <span class="brand-icon">
+
+                <svg
+                    viewBox="0 0 40 44"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M5 17.5L20 4L35 17.5V39H5V17.5Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linejoin="round"
+                    />
+
+                    <text
+                        x="20"
+                        y="31"
+                        text-anchor="middle"
+                        font-family="Georgia, serif"
+                        font-size="12"
+                        font-weight="600"
+                        fill="currentColor"
+                    >
+                        DD
+                    </text>
+
+                </svg>
+
+            </span>
+
+            <span>DwellDome</span>
+
+        </a>
+
+
+        <!-- Main visual text -->
+
+        <div class="visual-content">
+
+            <p class="visual-eyebrow">
+                YOUR HOME. YOUR STORY.
+            </p>
+
+            <h1>
+                A calmer way<br>
+                to care for<br>
+                everything under<br>
+                your roof.
+            </h1>
+
+            <div class="visual-line"></div>
+
+            <p class="visual-caption">
+                Your home, organized<br>
+                for a brighter tomorrow.
+            </p>
+
+        </div>
+
+
+        <!-- Bottom labels -->
+
+        <div class="visual-footer">
+
+            <span>HOMES</span>
+
+            <i></i>
+
+            <span>ASSETS</span>
+
+            <i></i>
+
+            <span>MEMORIES</span>
+
+            <i></i>
+
+            <span>PEACE OF MIND</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         RIGHT LOGIN
+         ========================================= -->
+
+    <section class="login-panel">
+
+        <div class="login-container">
+
+
+            <!-- Heading -->
+
+            <div class="login-heading">
+
+                <p class="login-eyebrow">
+                    WELCOME BACK
+                </p>
+
+                <h2>
+                    Sign in to your<br>
+                    <em>DwellDome.</em>
+                </h2>
+
+                <p class="login-description">
+                    Glad to see you again. Let's pick up right where
+                    you left off.
+                </p>
+
+            </div>
+
+
+            <!-- Form -->
+
+            <form
+                method="POST"
+                class="login-form"
+                novalidate
+            >
+
+                {% csrf_token %}
+
+
+                <!-- Non-field errors -->
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>{{ error }}</p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="3"
+                                    y="5"
+                                    width="18"
+                                    height="14"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <path
+                                    d="M4 7L12 13L20 7"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </span>
+
+                        {{ form.email }}
+
+                    </div>
+
+
+                    {% if form.email.errors %}
+
+                        <div class="field-error">
+
+                            {% for error in form.email.errors %}
+
+                                <span>{{ error }}</span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.password.id_for_label }}">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="5"
+                                    y="10"
+                                    width="14"
+                                    height="10"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <path
+                                    d="M8 10V7.5C8 5.29 9.79 3.5 12 3.5C14.21 3.5 16 5.29 16 7.5V10"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        {{ form.password }}
+
+
+                        <!-- Password visibility -->
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+
+                            <!-- Open eye -->
+
+                            <svg
+                                id="eyeOpen"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M2.5 12C2.5 12 6 5.5 12 5.5C18 5.5 21.5 12 21.5 12C21.5 12 18 18.5 12 18.5C6 18.5 2.5 12 2.5 12Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.7"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                            </svg>
+
+
+                            <!-- Closed eye -->
+
+                            <svg
+                                id="eyeClosed"
+                                class="hidden"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M3 3L21 21"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M10.7 5.7C11.13 5.57 11.56 5.5 12 5.5C18 5.5 21.5 12 21.5 12C21.5 12 20.35 14.1 18.45 15.85"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M6.1 7.1C3.72 8.85 2.5 12 2.5 12C2.5 12 6 18.5 12 18.5C13.4 18.5 14.65 18.1 15.75 17.55"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+
+                    {% if form.password.errors %}
+
+                        <div class="field-error">
+
+                            {% for error in form.password.errors %}
+
+                                <span>{{ error }}</span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Remember + Forgot -->
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            id="remember"
+                        >
+
+                        <span class="custom-checkbox"></span>
+
+                        <span>Remember me</span>
+
+                    </label>
+
+
+                    <!-- Password reset is not implemented yet -->
+
+                    <button
+                        type="button"
+                        class="forgot-password"
+                        id="forgotPassword"
+                    >
+                        Forgot password?
+                    </button>
+
+                </div>
+
+
+                <!-- Login -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+
+                    <span>Login</span>
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- Django Messages -->
+
+                {% if messages %}
+
+                    <div class="messages">
+
+                        {% for message in messages %}
+
+                            <p class="message {{ message.tags }}">
+                                {{ message }}
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Signup -->
+
+                <p class="signup-text">
+
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Sign up
+                    </a>
+
+                </p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    /* =========================================
+       PASSWORD SHOW / HIDE
+       ========================================= */
+
+    const passwordInput =
+        document.getElementById("id_password");
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+    const eyeOpen =
+        document.getElementById("eyeOpen");
+
+    const eyeClosed =
+        document.getElementById("eyeClosed");
+
+
+    if (
+        passwordInput &&
+        passwordToggle &&
+        eyeOpen &&
+        eyeClosed
+    ) {
+
+        passwordToggle.addEventListener(
+            "click",
+            function () {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+
+                if (isPassword) {
+
+                    passwordInput.type = "text";
+
+                    eyeOpen.classList.add("hidden");
+                    eyeClosed.classList.remove("hidden");
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    eyeClosed.classList.add("hidden");
+                    eyeOpen.classList.remove("hidden");
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       FORGOT PASSWORD
+       ========================================= */
+
+    const forgotPassword =
+        document.getElementById("forgotPassword");
+
+
+    if (forgotPassword) {
+
+        forgotPassword.addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "Password reset will be available soon."
+                );
+
+            }
+        );
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,464 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DwellDome — Your Home, Beautifully Organized</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <!-- Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+
+    <!-- BRAND -->
+
+    <a href="/" class="brand">
+
+        <span class="brand-icon">
+
+            <svg viewBox="0 0 40 44"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    d="M5 17.5L20 4L35 17.5V39H5V17.5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linejoin="round"
+                />
+
+                <text
+                    x="20"
+                    y="31"
+                    text-anchor="middle"
+                    font-family="Georgia, serif"
+                    font-size="12"
+                    font-weight="600"
+                    fill="currentColor">
+                    DD
+                </text>
+
+            </svg>
+
+        </span>
+
+
+        <span class="brand-name">
+            DwellDome
+        </span>
+
+    </a>
+
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-links">
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+
+    <!-- ACTIONS -->
+
+    <div class="nav-actions">
+
+        <a href="{% url 'register' %}" class="signup">
+            Sign Up
+        </a>
+
+        <a href="{% url 'login' %}" class="nav-button">
+            Login
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main class="hero">
+
+
+    <!-- =================================================
+         LEFT SIDE
+    ================================================= -->
+
+    <section class="hero-content">
+
+
+        <p class="eyebrow">
+            YOUR HOME, BEAUTIFULLY ORGANIZED
+        </p>
+
+
+
+        <h1>
+
+            Everything your<br>
+
+            home needs to<br>
+
+            <em>remember.</em>
+
+        </h1>
+
+
+
+        <p class="hero-description">
+
+            DwellDome brings your home's assets,
+            warranties, maintenance, documents
+            and expenses together in one calm,
+            beautifully organized space.
+
+        </p>
+
+
+
+        <!-- CTA -->
+
+        <a href="{% url 'register' %}" class="primary-button">
+
+            <span>
+                Create your home
+            </span>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+
+        <!-- NOTE -->
+
+        <div class="hero-note">
+
+            <span class="note-dot"></span>
+
+            <span>
+                One place for everything under your roof.
+            </span>
+
+        </div>
+
+
+
+        <!-- MINI FEATURES -->
+
+        <div class="mini-features">
+
+
+            <div class="mini-feature">
+
+                <span class="mini-icon">
+                    ◇
+                </span>
+
+                <div>
+
+                    <strong>
+                        Organize
+                    </strong>
+
+                    <span>
+                        smarter
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature-divider"></div>
+
+
+
+            <div class="mini-feature">
+
+                <span class="mini-icon">
+                    □
+                </span>
+
+                <div>
+
+                    <strong>
+                        Stay
+                    </strong>
+
+                    <span>
+                        ahead
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature-divider"></div>
+
+
+
+            <div class="mini-feature">
+
+                <span class="mini-icon">
+                    ♡
+                </span>
+
+                <div>
+
+                    <strong>
+                        A happier
+                    </strong>
+
+                    <span>
+                        home
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+    <!-- =================================================
+         RIGHT SIDE
+    ================================================= -->
+
+    <section class="hero-visual">
+
+
+        <!-- BACKGROUND -->
+
+        <div class="interior">
+
+            <div class="arch"></div>
+
+            <div class="wood-wall"></div>
+
+
+            <!-- Decorative plant -->
+
+            <div class="plant plant-one">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             HOME CARD
+        ================================================= -->
+
+        <div class="home-card">
+
+
+            <!-- HEADER -->
+
+            <div class="home-card-header">
+
+                <div>
+
+                    <p>
+                        MY HOME
+                    </p>
+
+                    <h2>
+                        The Onkar Residence
+                    </h2>
+
+                </div>
+
+                <span class="dots">
+                    •••
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ROOMS
+            ================================================= -->
+
+            <div class="rooms-grid">
+
+
+                <!-- 01 — DINING AREA -->
+
+                <div class="room dining-area">
+
+                    <span class="room-number">
+                        01
+                    </span>
+
+                    <div class="room-label">
+                        Dining Area
+                    </div>
+
+                </div>
+
+
+
+                <!-- 02 — LOUNGE -->
+
+                <div class="room lounge">
+
+                    <span class="room-number">
+                        02
+                    </span>
+
+                    <div class="room-label">
+                        Lounge
+                    </div>
+
+                </div>
+
+
+
+                <!-- 03 — LIVING ROOM -->
+
+                <div class="room living-room">
+
+                    <span class="room-number">
+                        03
+                    </span>
+
+                    <div class="room-label">
+                        Living Room
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================= -->
+
+            <div class="home-stats">
+
+
+                <div>
+
+                    <span>
+                        HOME ASSETS
+                    </span>
+
+                    <strong>
+                        24
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        WARRANTIES
+                    </span>
+
+                    <strong>
+                        08
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        NEXT SERVICE
+                    </span>
+
+                    <strong>
+                        12 DAYS
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

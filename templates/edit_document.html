@@ -1,0 +1,2341 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Document — DwellDome</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           DWELLDOME — MASTER VARIABLES
+        ===================================================== */
+
+        :root {
+            --cream: #f4ead8;
+            --cream-light: #f8f0e3;
+
+            --burgundy: #672731;
+            --burgundy-dark: #4d1b24;
+
+            --rose: #c98f82;
+            --rose-light: #e5c8bd;
+
+            --brown: #5b4942;
+            --dark: #281e1d;
+
+            --muted: #766763;
+
+            --border: rgba(74, 48, 43, 0.18);
+            --soft-border: rgba(74, 48, 43, 0.11);
+
+            --serif: "Playfair Display", Georgia, serif;
+            --sans: "DM Sans", Arial, sans-serif;
+
+            --font-page-title: clamp(31px, 3vw, 40px);
+            --font-featured-title: 25px;
+            --font-section-title: 19px;
+            --font-card-title: 19px;
+            --font-large-number: 23px;
+            --font-body: 9px;
+            --font-button: 9px;
+            --font-nav: 10px;
+            --font-label: 8px;
+            --font-small: 7px;
+            --font-tiny: 6px;
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--cream);
+            color: var(--dark);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .dashboard {
+            min-height: 100vh;
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 224px;
+
+            background: #5b2029;
+
+            border-right: 1px solid rgba(77, 27, 36, 0.35);
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 28px 15px 20px;
+
+            z-index: 20;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 0 10px;
+
+            margin-bottom: 34px;
+
+            color: var(--cream-light);
+        }
+
+        .sidebar-brand-icon {
+            width: 29px;
+            height: 32px;
+
+            color: var(--cream-light);
+
+            flex-shrink: 0;
+        }
+
+        .sidebar-brand-name {
+            font-family: var(--serif);
+
+            font-size: 20px;
+            font-weight: 600;
+
+            letter-spacing: -0.4px;
+            line-height: 1;
+
+            color: var(--cream-light);
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .nav-item {
+            min-height: 39px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            color: rgba(248, 240, 227, 0.70);
+
+            font-family: var(--sans);
+            font-size: var(--font-nav);
+            font-weight: 500;
+
+            line-height: 1.4;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(248, 240, 227, 0.10);
+            color: var(--cream-light);
+        }
+
+        .nav-item.active {
+            background: var(--cream-light);
+            color: var(--burgundy);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 17px;
+            height: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+        }
+
+        .nav-icon svg {
+            width: 16px;
+            height: 16px;
+
+            stroke: currentColor;
+            fill: none;
+
+            stroke-width: 1.55;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .nav-label {
+            flex: 1;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .sidebar-bottom .nav-item {
+            color: rgba(248, 240, 227, 0.70);
+        }
+
+        .sidebar-bottom .nav-item:hover {
+            color: var(--cream-light);
+            background: rgba(248, 240, 227, 0.10);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            width: calc(100% - 224px);
+
+            margin-left: 224px;
+
+            min-height: 100vh;
+
+            padding: 0 30px 34px;
+        }
+
+        .main-inner {
+            width: min(100%, 1240px);
+
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--cream-light);
+
+            border-bottom: 1px solid rgba(74, 48, 43, 0.13);
+
+            margin: 0 -30px;
+
+            padding: 0 30px;
+
+            position: relative;
+
+            z-index: 15;
+        }
+
+        .search {
+            width: 245px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 0 12px;
+
+            border: 1px solid var(--soft-border);
+
+            border-radius: 8px;
+
+            background: rgba(244, 234, 216, 0.55);
+
+            color: var(--muted);
+        }
+
+        .search svg {
+            width: 15px;
+            height: 15px;
+
+            fill: none;
+            stroke: currentColor;
+
+            stroke-width: 1.6;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .search input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-body);
+            font-weight: 400;
+
+            line-height: 1.4;
+
+            color: var(--dark);
+        }
+
+        .search input::placeholder {
+            color: #94827a;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        /* =====================================================
+           NOTIFICATION
+        ===================================================== */
+
+        .notification-button {
+            position: relative;
+
+            width: 32px;
+            height: 32px;
+
+            border: 1px solid var(--soft-border);
+
+            border-radius: 50%;
+
+            background: rgba(244, 234, 216, 0.58);
+
+            color: var(--brown);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .notification-button:hover {
+            background: var(--rose-light);
+            color: var(--burgundy);
+        }
+
+        .notification-button svg {
+            width: 15px;
+            height: 15px;
+
+            fill: none;
+            stroke: currentColor;
+
+            stroke-width: 1.5;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: -3px;
+            right: -3px;
+
+            min-width: 13px;
+            height: 13px;
+
+            padding: 0 3px;
+
+            border-radius: 10px;
+
+            background: var(--burgundy);
+            color: var(--cream-light);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: var(--sans);
+
+            font-size: 6px;
+            font-weight: 600;
+
+            line-height: 1;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        .profile-wrapper {
+            position: relative;
+        }
+
+        .profile-trigger {
+            min-height: 40px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 4px 7px 4px 5px;
+
+            border: 1px solid transparent;
+
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: var(--brown);
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .profile-trigger:hover,
+        .profile-trigger.open {
+            background: rgba(244, 234, 216, 0.72);
+
+            border-color: var(--soft-border);
+        }
+
+        .avatar {
+            width: 31px;
+            height: 31px;
+
+            border-radius: 50%;
+
+            background: var(--rose-light);
+
+            color: var(--burgundy);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: var(--serif);
+
+            font-size: 13px;
+            font-weight: 600;
+
+            line-height: 1;
+
+            flex-shrink: 0;
+        }
+
+        .top-profile-name {
+            font-family: var(--sans);
+
+            font-size: var(--font-nav);
+            font-weight: 600;
+
+            line-height: 1.4;
+
+            color: var(--brown);
+        }
+
+        .profile-chevron {
+            width: 12px;
+            height: 12px;
+
+            color: var(--muted);
+
+            transition: transform 0.2s ease;
+        }
+
+        .profile-chevron svg {
+            width: 100%;
+            height: 100%;
+
+            fill: none;
+            stroke: currentColor;
+
+            stroke-width: 1.6;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .profile-trigger.open .profile-chevron {
+            transform: rotate(180deg);
+        }
+
+
+        /* =====================================================
+           PROFILE MENU
+        ===================================================== */
+
+        .profile-menu {
+            position: absolute;
+
+            top: calc(100% + 9px);
+            right: 0;
+
+            width: 190px;
+
+            padding: 7px;
+
+            background: var(--cream-light);
+
+            border: 1px solid var(--soft-border);
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 14px 35px rgba(40, 30, 29, 0.12);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-5px);
+
+            transition:
+                opacity 0.18s ease,
+                visibility 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .profile-menu.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .profile-menu-header {
+            padding: 10px 10px 11px;
+
+            border-bottom: 1px solid var(--soft-border);
+
+            margin-bottom: 5px;
+        }
+
+        .profile-menu-header strong {
+            display: block;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-nav);
+            font-weight: 600;
+
+            line-height: 1.4;
+
+            color: var(--dark);
+
+            margin-bottom: 3px;
+        }
+
+        .profile-menu-header span {
+            display: block;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-small);
+            font-weight: 400;
+
+            line-height: 1.5;
+
+            color: var(--muted);
+        }
+
+        .profile-menu-item {
+            min-height: 37px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 8px 10px;
+
+            border-radius: 7px;
+
+            color: var(--brown);
+
+            font-family: var(--sans);
+
+            font-size: var(--font-body);
+            font-weight: 500;
+
+            line-height: 1.4;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .profile-menu-item:hover {
+            background: rgba(103, 39, 49, 0.08);
+
+            color: var(--burgundy);
+        }
+
+        .profile-menu-icon {
+            width: 15px;
+            height: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+        }
+
+        .profile-menu-icon svg {
+            width: 15px;
+            height: 15px;
+
+            fill: none;
+            stroke: currentColor;
+
+            stroke-width: 1.5;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .profile-menu-divider {
+            height: 1px;
+
+            background: var(--soft-border);
+
+            margin: 5px 3px;
+        }
+
+        .profile-menu-item.logout {
+            color: var(--burgundy);
+        }
+
+        .profile-menu-item.logout:hover {
+            background: rgba(103, 39, 49, 0.10);
+        }
+
+
+        /* =====================================================
+           EDIT DOCUMENT — PAGE INTRO
+        ===================================================== */
+
+        .page-intro {
+            padding-top: 27px;
+
+            margin-bottom: 18px;
+        }
+
+        .page-eyebrow {
+            margin-bottom: 8px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-label);
+            font-weight: 600;
+
+            letter-spacing: 2.4px;
+
+            color: #ae765f;
+
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-family: var(--serif);
+
+            font-size: var(--font-page-title);
+
+            line-height: 1.08;
+
+            font-weight: 500;
+
+            letter-spacing: -1.1px;
+
+            color: var(--dark);
+        }
+
+        .page-description {
+            max-width: 470px;
+
+            margin-top: 8px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-body);
+
+            line-height: 1.6;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           EDIT DOCUMENT FORM CARD
+        ===================================================== */
+
+        .asset-form-card {
+            width: 100%;
+            max-width: none;
+
+            padding: 27px 29px 29px;
+
+            background: var(--cream-light);
+
+            border: 1px solid var(--soft-border);
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 10px 30px rgba(74, 48, 43, 0.035);
+        }
+
+        .form-heading {
+            margin-bottom: 21px;
+
+            color: var(--dark);
+
+            font-family: var(--serif);
+
+            font-size: var(--font-section-title);
+
+            font-weight: 500;
+
+            line-height: 1.15;
+        }
+
+
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 17px 19px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        /* =====================================================
+           FORM FIELDS
+        ===================================================== */
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-label);
+            font-weight: 600;
+
+            color: var(--brown);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: rgba(255, 250, 242, 0.62);
+
+            color: var(--dark);
+
+            outline: none;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-body);
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 42px;
+
+            padding: 0 12px;
+
+            /*
+               Keeps text vertically centered
+               inside the 42px input.
+            */
+            line-height: 42px;
+        }
+
+        .form-group textarea {
+            min-height: 86px;
+
+            padding: 11px 12px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9a8981;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--rose);
+
+            background: var(--cream-light);
+
+            box-shadow:
+                0 0 0 3px rgba(201, 143, 130, 0.09);
+        }
+
+
+        /* =====================================================
+           FILE UPLOAD
+        ===================================================== */
+
+        .file-upload-wrapper {
+            position: relative;
+
+            width: 100%;
+            height: 42px;
+        }
+
+        .file-upload-input {
+            position: absolute;
+
+            width: 1px;
+            height: 1px;
+
+            opacity: 0;
+
+            overflow: hidden;
+        }
+
+        .file-upload-box {
+            width: 100%;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 0 10px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: rgba(255, 250, 242, 0.62);
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .file-upload-box:focus-within {
+            border-color: var(--rose);
+
+            background: var(--cream-light);
+
+            box-shadow:
+                0 0 0 3px rgba(201, 143, 130, 0.09);
+        }
+
+        .file-upload-button {
+            height: 26px;
+
+            min-width: 84px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            padding: 0 10px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+
+            background: var(--cream);
+
+            color: var(--brown);
+
+            font-family: var(--sans);
+
+            font-size: var(--font-small);
+            font-weight: 600;
+
+            line-height: 1;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .file-upload-button:hover {
+            background: var(--rose-light);
+
+            border-color: var(--rose);
+
+            color: var(--burgundy);
+        }
+
+        .file-upload-name {
+            min-width: 0;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+
+            color: var(--muted);
+
+            font-family: var(--sans);
+
+            font-size: var(--font-body);
+
+            line-height: 1.4;
+
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+        }
+
+
+        /* =====================================================
+           CURRENT FILE
+        ===================================================== */
+
+        .current-file {
+            margin-top: 6px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-label);
+
+            line-height: 1.5;
+
+            color: var(--muted);
+        }
+
+        .current-file a {
+            color: var(--burgundy);
+
+            font-weight: 600;
+        }
+
+        .current-file a:hover {
+            color: var(--burgundy-dark);
+
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           FORM ERRORS
+        ===================================================== */
+
+        .field-error {
+            margin-top: 5px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-label);
+
+            line-height: 1.4;
+
+            color: var(--burgundy);
+        }
+
+        .form-errors {
+            margin-bottom: 17px;
+
+            padding: 11px 13px;
+
+            border: 1px solid rgba(103, 39, 49, 0.20);
+
+            border-radius: 8px;
+
+            background: rgba(103, 39, 49, 0.055);
+
+            color: var(--burgundy);
+
+            font-family: var(--sans);
+
+            font-size: var(--font-label);
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           FORM ACTIONS
+        ===================================================== */
+
+        .form-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 21px;
+        }
+
+        .form-button {
+            height: 40px;
+
+            min-width: 102px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 17px;
+
+            border-radius: 7px;
+
+            font-family: var(--sans);
+
+            font-size: var(--font-button);
+
+            font-weight: 600;
+
+            line-height: 1;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .form-button:active {
+            transform: translateY(1px);
+        }
+
+        .cancel-button {
+            background: transparent;
+
+            border: 1px solid var(--border);
+
+            color: var(--brown);
+        }
+
+        .cancel-button:hover {
+            background: rgba(244, 234, 216, 0.72);
+
+            border-color: rgba(74, 48, 43, 0.24);
+
+            color: var(--burgundy);
+        }
+
+        .save-button {
+            background: var(--burgundy);
+
+            border: 1px solid var(--burgundy);
+
+            color: #ffffff;
+        }
+
+        .save-button:hover {
+            background: var(--burgundy-dark);
+
+            border-color: var(--burgundy-dark);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1180px) {
+
+            .sidebar {
+                width: 205px;
+            }
+
+            .main {
+                width: calc(100% - 205px);
+
+                margin-left: 205px;
+
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+            .topbar {
+                margin-left: -22px;
+                margin-right: -22px;
+
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+        }
+
+
+        @media (max-width: 980px) {
+
+            .sidebar {
+                width: 72px;
+
+                padding-left: 9px;
+                padding-right: 9px;
+            }
+
+            .sidebar-brand {
+                justify-content: center;
+
+                padding: 0;
+
+                margin-bottom: 28px;
+            }
+
+            .sidebar-brand-name {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .main {
+                width: calc(100% - 72px);
+
+                margin-left: 72px;
+            }
+
+            .topbar {
+                margin-left: -22px;
+                margin-right: -22px;
+
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+        }
+
+
+        @media (max-width: 720px) {
+
+            .main {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .topbar {
+                height: 64px;
+
+                margin-left: -15px;
+                margin-right: -15px;
+
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .search {
+                width: 190px;
+            }
+
+            .page-intro {
+                display: block;
+
+                padding-top: 22px;
+            }
+
+            .page-title {
+                font-size: 34px;
+            }
+
+            .asset-form-card {
+                padding: 23px 22px 24px;
+
+                border-radius: 11px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+
+                gap: 16px;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+        }
+
+
+        @media (max-width: 470px) {
+
+            .sidebar {
+                width: 60px;
+            }
+
+            .main {
+                width: calc(100% - 60px);
+
+                margin-left: 60px;
+
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .topbar {
+                margin-left: -12px;
+                margin-right: -12px;
+
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .search {
+                width: 145px;
+            }
+
+            .top-profile-name {
+                display: none;
+            }
+
+            .profile-chevron {
+                display: none;
+            }
+
+            .profile-menu {
+                right: -4px;
+            }
+
+            .page-title {
+                font-size: 31px;
+            }
+
+            .page-description {
+                font-size: var(--font-body);
+            }
+
+            .asset-form-card {
+                padding: 21px 18px 22px;
+
+                border-radius: 10px;
+            }
+
+            .form-heading {
+                font-size: 18px;
+
+                margin-bottom: 18px;
+            }
+
+            .form-actions {
+                width: 100%;
+
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+            }
+
+        }
+
+
+        @media (max-width: 360px) {
+
+            .search {
+                width: 125px;
+            }
+
+            .page-title {
+                font-size: 29px;
+            }
+
+            .asset-form-card {
+                padding: 18px 15px 19px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="sidebar-brand"
+        >
+
+            <span class="sidebar-brand-icon">
+
+                <svg
+                    viewBox="0 0 40 44"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <path
+                        d="M5 17.5L20 4L35 17.5V39H5V17.5Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linejoin="round"
+                    />
+
+                    <text
+                        x="20"
+                        y="31"
+                        text-anchor="middle"
+                        font-family="Georgia, serif"
+                        font-size="12"
+                        font-weight="600"
+                        fill="currentColor"
+                    >
+                        DD
+                    </text>
+
+                </svg>
+
+            </span>
+
+            <span class="sidebar-brand-name">
+                DwellDome
+            </span>
+
+        </a>
+
+
+        <!-- MAIN NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <!-- OVERVIEW -->
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Overview
+                </span>
+
+            </a>
+
+
+            <!-- MY HOME -->
+
+            <a
+                href="{% url 'my_home' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M3 11.5L12 4L21 11.5"/>
+                        <path d="M5.5 10.5V20H18.5V10.5"/>
+                        <path d="M9.5 20V14H14.5V20"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    My Home
+                </span>
+
+            </a>
+
+
+            <!-- ROOMS -->
+
+            <a
+                href="{% url 'rooms' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M5 20V5H19V20"/>
+                        <path d="M8 5V20"/>
+                        <path d="M8 12H19"/>
+                        <circle cx="16" cy="16" r="0.9"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Rooms
+                </span>
+
+            </a>
+
+
+            <!-- ASSETS -->
+
+            <a
+                href="{% url 'assets' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M4 8L12 4L20 8L12 12L4 8Z"/>
+                        <path d="M4 12L12 16L20 12"/>
+                        <path d="M4 16L12 20L20 16"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Assets
+                </span>
+
+            </a>
+
+
+            <!-- WARRANTIES -->
+
+            <a
+                href="{% url 'warranties' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M12 3L19 6V11C19 16 16 19 12 21C8 19 5 16 5 11V6L12 3Z"/>
+                        <path d="M9 12L11 14L15 9.5"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Warranties
+                </span>
+
+            </a>
+
+
+            <!-- MAINTENANCE -->
+
+            <a
+                href="{% url 'maintenance' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M14.5 5.5A4 4 0 0 0 19 10L10 19L6 15L15 6A4 4 0 0 0 14.5 5.5Z"/>
+                        <path d="M5 19L3.5 20.5"/>
+                        <path d="M7 21L5.5 22.5"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Maintenance
+                </span>
+
+            </a>
+
+
+            <!-- DOCUMENTS — ACTIVE -->
+
+            <a
+                href="{% url 'documents' %}"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M6 3H15L19 7V21H6Z"/>
+                        <path d="M15 3V8H19"/>
+                        <path d="M9 12H16"/>
+                        <path d="M9 16H16"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Documents
+                </span>
+
+            </a>
+
+
+            <!-- EXPENSES -->
+
+            <a
+                href="{% url 'expenses' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect x="4" y="5" width="16" height="15" rx="2"/>
+                        <path d="M8 5V3"/>
+                        <path d="M16 5V3"/>
+                        <path d="M4 9H20"/>
+                        <path d="M8 13H11"/>
+                        <path d="M14 13H17"/>
+                        <path d="M8 17H11"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Expenses
+                </span>
+
+            </a>
+
+
+            <!-- ANALYTICS -->
+
+            <a
+                href="{% url 'analytics' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M4 20V10"/>
+                        <path d="M10 20V5"/>
+                        <path d="M16 20V13"/>
+                        <path d="M22 20V8"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Analytics
+                </span>
+
+            </a>
+
+
+            <!-- PROFILE -->
+
+            <a
+                href="{% url 'profile' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle cx="12" cy="8" r="3.5"/>
+                        <path d="M5 20C5.8 16.5 8.2 14.5 12 14.5C15.8 14.5 18.2 16.5 19 20"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M10 5H5V19H10"/>
+                        <path d="M14 8L19 12L14 16"/>
+                        <path d="M19 12H9"/>
+
+                    </svg>
+
+                </span>
+
+                <span class="nav-label">
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+        <div class="main-inner">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+
+                <form class="search" action="{% url 'global_search' %}" method="get">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle cx="10.8" cy="10.8" r="6.5"/>
+                        <path d="M16 16L21 21"/>
+
+                    </svg>
+
+
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Search your home..."
+                        value="{{ request.GET.q|default:'' }}"
+                        aria-label="Search your home"
+                    >
+
+                </form>
+
+
+                <div class="top-actions">
+
+
+                    <!-- NOTIFICATION -->
+
+                    <a
+                        href="{% url 'notifications' %}"
+                        class="notification-button"
+                        aria-label="Notifications"
+                    >
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M18 9C18 5.7 15.8 3.5 12 3.5C8.2 3.5 6 5.7 6 9V13L4.5 16H19.5L18 13V9Z"/>
+
+                            <path d="M10 19C10.5 20 11.2 20.5 12 20.5C12.8 20.5 13.5 20 14 19"/>
+
+                        </svg>
+
+                        {% if unread_notifications_count %}
+
+                            <span class="notification-badge">
+                                {{ unread_notifications_count }}
+                            </span>
+
+                        {% endif %}
+
+                    </a>
+
+
+                    <!-- PROFILE -->
+
+                    <div class="profile-wrapper">
+
+                        <button
+                            type="button"
+                            class="profile-trigger"
+                            id="profileTrigger"
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                        >
+
+                            <span class="avatar">
+                                {{ request.user.first_name|default:request.user.username|first|upper }}
+                            </span>
+
+                            <span class="top-profile-name">
+                                {{ request.user.first_name|default:request.user.username }}
+                            </span>
+
+                            <span class="profile-chevron">
+
+                                <svg viewBox="0 0 24 24">
+
+                                    <path d="M6 9L12 15L18 9"/>
+
+                                </svg>
+
+                            </span>
+
+                        </button>
+
+
+                        <div
+                            class="profile-menu"
+                            id="profileMenu"
+                        >
+
+                            <div class="profile-menu-header">
+
+                                <strong>
+                                    {{ request.user.first_name|default:request.user.username }}
+                                </strong>
+
+                                <span>
+                                    My DwellDome account
+                                </span>
+
+                            </div>
+
+
+                            <!-- PROFILE -->
+
+                            <a
+                                href="{% url 'profile' %}"
+                                class="profile-menu-item"
+                            >
+
+                                <span class="profile-menu-icon">
+
+                                    <svg viewBox="0 0 24 24">
+
+                                        <circle
+                                            cx="12"
+                                            cy="8"
+                                            r="3.5"
+                                        />
+
+                                        <path d="M5 20C5.8 16.5 8.2 14.5 12 14.5C15.8 14.5 18.2 16.5 19 20"/>
+
+                                    </svg>
+
+                                </span>
+
+                                <span>
+                                    Profile
+                                </span>
+
+                            </a>
+
+
+                            <!-- SETTINGS -->
+
+                            <a
+                                href="{% url 'settings' %}"
+                                class="profile-menu-item"
+                            >
+
+                                <span class="profile-menu-icon">
+
+                                    <svg viewBox="0 0 24 24">
+
+                                        <circle
+                                            cx="12"
+                                            cy="12"
+                                            r="3"
+                                        />
+
+                                        <path d="M19.4 15A1.7 1.7 0 0 0 19.7 17.1L19.8 17.2L17.2 19.8L17.1 19.7A1.7 1.7 0 0 0 15 19.4A1.7 1.7 0 0 0 14 21V21H10V20.9A1.7 1.7 0 0 0 9 19.4A1.7 1.7 0 0 0 6.9 19.7L6.8 19.8L4.2 17.2L4.3 17.1A1.7 1.7 0 0 0 4.6 15A1.7 1.7 0 0 0 3 14H3V10H3.1A1.7 1.7 0 0 0 4.6 9A1.7 1.7 0 0 0 4.3 6.9L4.2 6.8L6.8 4.2L6.9 4.3A1.7 1.7 0 0 0 9 4.6A1.7 1.7 0 0 0 10 3V3H14V3.1A1.7 1.7 0 0 0 15 4.6A1.7 1.7 0 0 0 17.1 4.3L17.2 4.2L19.8 6.8L19.7 6.9A1.7 1.7 0 0 0 19.4 9A1.7 1.7 0 0 0 19.4 15Z"/>
+
+                                    </svg>
+
+                                </span>
+
+                                <span>
+                                    Settings
+                                </span>
+
+                            </a>
+
+
+                            <div class="profile-menu-divider"></div>
+
+
+                            <!-- LOGOUT -->
+
+                            <a
+                                href="{% url 'logout' %}"
+                                class="profile-menu-item logout"
+                            >
+
+                                <span class="profile-menu-icon">
+
+                                    <svg viewBox="0 0 24 24">
+
+                                        <path d="M10 5H5V19H10"/>
+
+                                        <path d="M14 8L19 12L14 16"/>
+
+                                        <path d="M19 12H9"/>
+
+                                    </svg>
+
+                                </span>
+
+                                <span>
+                                    Logout
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =====================================================
+                 EDIT DOCUMENT BODY
+            ====================================================== -->
+
+            <section class="page-intro">
+
+                <div class="page-eyebrow">
+                    DOCUMENTS
+                </div>
+
+                <h1 class="page-title">
+                    Edit document
+                </h1>
+
+                <p class="page-description">
+                    Update the details of your
+                    {{ document.name }} and keep its
+                    information organized in one place.
+                </p>
+
+            </section>
+
+
+            <!-- =====================================================
+                 DOCUMENT FORM
+            ====================================================== -->
+
+            <section class="asset-form-card">
+
+
+                <h2 class="form-heading">
+                    Document details
+                </h2>
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {{ form.non_field_errors }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="form-grid">
+
+
+                        <!-- NAME -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.name.id_for_label }}">
+                                Name
+                            </label>
+
+                            {{ form.name }}
+
+                            {% for error in form.name.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- DOCUMENT TYPE -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.document_type.id_for_label }}">
+                                Document type
+                            </label>
+
+                            {{ form.document_type }}
+
+                            {% for error in form.document_type.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- ASSET -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.asset.id_for_label }}">
+                                Asset
+                            </label>
+
+                            {{ form.asset }}
+
+                            {% for error in form.asset.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- DOCUMENT FILE -->
+
+                        <div class="form-group full-width">
+
+                            <label for="{{ form.file.id_for_label }}">
+                                Document file
+                            </label>
+
+
+                            <div class="file-upload-wrapper">
+
+                                <input
+                                    type="file"
+                                    name="{{ form.file.html_name }}"
+                                    id="{{ form.file.id_for_label }}"
+                                    class="file-upload-input"
+                                >
+
+
+                                <div class="file-upload-box">
+
+                                    <label
+                                        for="{{ form.file.id_for_label }}"
+                                        class="file-upload-button"
+                                    >
+                                        Choose File
+                                    </label>
+
+
+                                    <span
+                                        class="file-upload-name"
+                                        id="fileUploadName"
+                                    >
+                                        No file chosen
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            {% if document.file %}
+
+                                <div class="current-file">
+
+                                    Leave empty to keep the current document.
+
+                                    Current file:
+
+                                    <a
+                                        href="{{ document.file.url }}"
+                                        target="_blank"
+                                    >
+                                        {{ document.file.name|cut:"documents/" }}
+                                    </a>
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="current-file">
+                                    Upload a document file.
+                                </div>
+
+                            {% endif %}
+
+
+                            {% for error in form.file.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="form-group full-width">
+
+                            <label for="{{ form.description.id_for_label }}">
+                                Description
+                            </label>
+
+                            {{ form.description }}
+
+                            {% for error in form.description.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- FORM ACTIONS -->
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'documents' %}"
+                            class="form-button cancel-button"
+                        >
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="form-button save-button"
+                        >
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     PROFILE DROPDOWN SCRIPT
+====================================================== -->
+
+<script>
+
+    const profileTrigger =
+        document.getElementById("profileTrigger");
+
+    const profileMenu =
+        document.getElementById("profileMenu");
+
+
+    profileTrigger.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                profileMenu.classList.toggle("show");
+
+            profileTrigger.classList.toggle(
+                "open",
+                isOpen
+            );
+
+            profileTrigger.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !profileMenu.contains(event.target) &&
+                !profileTrigger.contains(event.target)
+            ) {
+
+                profileMenu.classList.remove("show");
+
+                profileTrigger.classList.remove("open");
+
+                profileTrigger.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                profileMenu.classList.remove("show");
+
+                profileTrigger.classList.remove("open");
+
+                profileTrigger.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       FILE NAME
+    ====================================================== */
+
+    const fileInput =
+        document.getElementById(
+            "{{ form.file.id_for_label }}"
+        );
+
+    const fileUploadName =
+        document.getElementById(
+            "fileUploadName"
+        );
+
+
+    if (fileInput && fileUploadName) {
+
+        fileInput.addEventListener(
+            "change",
+            function () {
+
+                if (
+                    this.files &&
+                    this.files.length > 0
+                ) {
+
+                    fileUploadName.textContent =
+                        this.files[0].name;
+
+                } else {
+
+                    fileUploadName.textContent =
+                        "No file chosen";
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
